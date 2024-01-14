@@ -1,4 +1,8 @@
+import os
 from setuptools import setup, find_packages
+
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
 setup(
     name='clust_st',
@@ -7,8 +11,5 @@ setup(
     description='Spatio Temporal Clusters',
     url='https://github.com/Data-Open-Algorithms/clust_st',
     packages=find_packages(),
-    install_requires=[
-        'numpy>=1.24.3',
-        'pandas>=2.0.1'
-    ]
+    install_requires=required
 )
