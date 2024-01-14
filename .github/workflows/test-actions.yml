@@ -5,5 +5,6 @@ jobs:
     Install-Package:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
             - run: pip install .
             - run: python samples/clustering_raining_data_chile.py
