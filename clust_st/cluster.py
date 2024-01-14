@@ -4,5 +4,8 @@ class CorClustST:
         self.rho = rho
         self.labels_ = None
 
-    def fit(self, dist_matrix, corr_matrix):
+    def step_1(self, distance_matrix, corr_matrix):
         pass
+
+    def fit(self, dist_matrix, corr_matrix):
+        self.step_1(dist_matrix, corr_matrix)
