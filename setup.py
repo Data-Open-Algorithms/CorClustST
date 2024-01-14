@@ -7,4 +7,8 @@ setup(
     description='Spatio Temporal Clusters',
     url='https://github.com/Data-Open-Algorithms/clust_st',
     packages=find_packages(),
+    install_requires=[
+        'numpy>=1.24.3',
+        'pandas>=2.0.1'
+    ]
 )
