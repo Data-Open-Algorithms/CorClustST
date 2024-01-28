@@ -12,12 +12,13 @@ except ImportError:
 
 def get_distance_matrix(stations_info_df, stations_of_interest):
     dist_func = DistanceMetric.get_metric('haversine')
+    world_radius = 6373
     df_spatial_sample = stations_info_df.loc[stations_of_interest][["latitud", "longitud"]]
     df_spatial_sample_rad = df_spatial_sample.copy()
     df_spatial_sample_rad['latitud'] = np.radians(df_spatial_sample_rad['latitud'])
     df_spatial_sample_rad['longitud'] = np.radians(df_spatial_sample_rad['longitud'])
-    dist_matrix = dist_func.pairwise(df_spatial_sample_rad[['latitud', 'longitud']].to_numpy()) * 6373
-    return dist_matrix
+    dist_matrix = dist_func.pairwise(df_spatial_sample_rad[['latitud', 'longitud']].to_numpy()) * world_radius
+    return dist_matrix 
 
 
 def main():
@@ -35,7 +36,7 @@ def main():
     # create correlation matrix
     corr_matrix = abs(precipitations_df.corr(method="spearman"))
 
-    corclust_st = CorClustST(epsilon=1.7, rho=2.3)
+    corclust_st = CorClustST(epsilon=80, rho=0.7)
     corclust_st.fit(dist_matrix, corr_matrix)
 
     # plots
