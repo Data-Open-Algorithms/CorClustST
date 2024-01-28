@@ -21,11 +21,11 @@ def get_distance_matrix(stations_info_df, stations_of_interest):
 
 
 def main():
-    print("hola")
+    file_path = os.path.dirname(__file__)
     # data load
-    precipitations_df = pd.read_csv("./chile_precipitation_clustering_data/chilean_stations_precipitation.csv",
+    precipitations_df = pd.read_csv(os.path.join(file_path, "chile_precipitation_clustering_data/chilean_stations_precipitation.csv"),
                                     index_col=0, parse_dates=True)
-    stations_info_df = pd.read_csv("./chile_precipitation_clustering_data/stations_info.csv",
+    stations_info_df = pd.read_csv(os.path.join(file_path, "chile_precipitation_clustering_data/stations_info.csv"),
                                    index_col=1)
     stations_of_interest = pd.Series(precipitations_df.columns.values).apply(int).values
 
