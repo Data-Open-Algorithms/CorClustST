@@ -1,3 +1,4 @@
+import time
 import os.path
 import unittest
 import numpy as np
@@ -22,7 +23,6 @@ def get_distance_matrix(stations_info_df, stations_of_interest):
 
 
 def main():
-    print("hola")
     # data load
     precipitations_df = pd.read_csv("./chile_precipitation_clustering_data/chilean_stations_precipitation.csv",
                                     index_col=0, parse_dates=True)
@@ -34,10 +34,14 @@ def main():
     dist_matrix = get_distance_matrix(stations_info_df, stations_of_interest)
 
     # create correlation matrix
-    corr_matrix = abs(precipitations_df.corr(method="spearman"))
+    corr_matrix = abs(precipitations_df.corr(method="spearman")).values
 
     corclust_st = CorClustST(epsilon=80, rho=0.7)
+    st_time = time.time()
     corclust_st.fit(dist_matrix, corr_matrix)
+    print(time.time() - st_time)
+
+    print(corclust_st.labels)
 
     # plots
 
