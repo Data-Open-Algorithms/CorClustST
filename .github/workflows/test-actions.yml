@@ -6,6 +6,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+              with:
+                lfs: true
             - run: pip install .
             - run: python -m unittest
             - run: python samples/clustering_raining_data_chile.py
