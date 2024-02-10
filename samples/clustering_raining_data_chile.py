@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 from clust_st import CorClustST
 import pandas as pd
+import matplotlib.pyplot as plt
 
 try:
     from sklearn.neighbors import DistanceMetric
@@ -40,6 +41,16 @@ def main():
     corclust_st.fit(dist_matrix, corr_matrix)
 
     # plots
+    df_spatio = stations_info_df.loc[stations_of_interest][["latitud", "longitud"]]
+
+    plt.figure(figsize=(3, 7))
+    plt.scatter(df_spatio.longitud, df_spatio.latitud, c=corclust_st.labels_, cmap='viridis', alpha=0.4,
+                edgecolors='black', s=15)
+    plt.title('CorClustSt Clusters')
+    plt.xlabel('Longitude')
+    plt.ylabel('Latitude')
+    plt.xlim((-80, -60))
+    plt.show()
 
 
 if __name__ == "__main__":
